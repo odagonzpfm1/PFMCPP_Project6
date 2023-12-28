@@ -74,6 +74,7 @@ struct T
     std::string name;
     T(int v, const char* letterName) 
     {
+        if (letterName == nullptr) return;
         distance = v;             // Implicit "this"
         this->name = *letterName; // Explicit "this"
     }
@@ -83,6 +84,7 @@ struct A
 {
     T* compare(T* a, T* b) 
     {
+        if (a == nullptr || b == nullptr) return nullptr;
         if (a->distance < b->distance) return a;
         if (a->distance > b->distance) return b;
         return nullptr;
@@ -94,6 +96,7 @@ struct U
     float value1{0}, value2{0};
     float updateValue(float* updatedValue)
     {
+        if (updatedValue == nullptr) return 0.0f;
         std::cout << "U's value1 value: " << this->value1 << std::endl;
         this->value1 = *updatedValue;
         std::cout << "U's value1 updated value: " << this->value1 << std::endl;
@@ -110,6 +113,7 @@ struct Z
 {
     static float functionA (U* that, float* updatedValue) 
     {
+        if (that == nullptr || updatedValue == nullptr) return 0.0f;
         std::cout << "U's value1 value: " << that->value1 << std::endl;
         that->value1 = *updatedValue;
         std::cout << "U's value1 updated value: " << that->value1 << std::endl;
@@ -145,6 +149,7 @@ int main()
 
     A f;
     auto* smaller = f.compare(&firstSign, &secondSign);
+
     std::cout << "the smaller one is << " << smaller->name << ".\nIf compare() returns a nullptr, then nothing will print out."<< std::endl;
 
     U firstU;
@@ -153,6 +158,6 @@ int main()
     Z::functionA(&firstU, &updatedValue) << std::endl; 
 
     U secondU;
-    std::cout << "[member func] secondU's multiplied values: " <<
+    std::cout << "[member func] secondU's multiplied values: \n" <<
     secondU.updateValue(&updatedValue) << std::endl;
 }
