@@ -94,11 +94,14 @@ struct U
     float value1{0}, value2{0};
     float updateValue(float* updatedValue)
     {
+        std::cout << "U's value1 value: " << this->value1 << std::endl;
         this->value1 = *updatedValue;
+        std::cout << "U's value1 updated value: " << this->value1 << std::endl;
         while (std::abs(this->value2 - this->value1) > 0.001f) 
         {
             this->value2 += 0.01f;
         }
+        std::cout << "U's value2 updated value: " << this->value2 << std::endl;
         return this->value2 * this->value1;
     }
 };
