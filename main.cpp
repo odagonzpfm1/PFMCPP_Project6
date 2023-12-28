@@ -72,7 +72,7 @@ struct T
 {
     int distance;
     std::string name;
-    T(int v, const char *letterName) 
+    T(int v, const char* letterName) 
     {
         distance = v;             // Implicit "this"
         this->name = *letterName; // Explicit "this"
@@ -81,7 +81,7 @@ struct T
 
 struct A 
 {
-    T *compare(T *a, T *b) 
+    T* compare(T* a, T* b) 
     {
         if (a->distance < b->distance) return a;
         if (a->distance > b->distance) return b;
@@ -92,7 +92,7 @@ struct A
 struct U 
 {
     float value1{0}, value2{0};
-    float updateValue(float *updatedValue)
+    float updateValue(float* updatedValue)
     {
         this->value1 = *updatedValue;
         while (std::abs(this->value2 - this->value1) > 0.001f) 
@@ -105,7 +105,7 @@ struct U
 
 struct Z 
 {
-    static float functionA (U *that, float *updatedValue) 
+    static float functionA (U* that, float* updatedValue) 
     {
         std::cout << "U's value1 value: " << that->value1 << std::endl;
         that->value1 = *updatedValue;
@@ -141,7 +141,7 @@ int main()
     T secondSign(17, "B");
 
     A f;
-    auto *smaller = f.compare(&firstSign, &secondSign);
+    auto* smaller = f.compare(&firstSign, &secondSign);
     std::cout << "the smaller one is << " << smaller->name << ".\nIf compare() returns a nullptr, then nothing will print out."<< std::endl;
 
     U firstU;
