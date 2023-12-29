@@ -84,9 +84,12 @@ struct A
 {
     T* compare(T* a, T* b) 
     {
-        if ((a == nullptr || b == nullptr) || a->distance == b->distance) return nullptr;
-        if (a->distance < b->distance) return a;
-        if (a->distance > b->distance) return b;
+        if (a != nullptr && b != nullptr) 
+        {
+            if (a->distance < b->distance) return a;
+            if (a->distance > b->distance) return b;
+        }
+        return nullptr;
     }
 };
 
