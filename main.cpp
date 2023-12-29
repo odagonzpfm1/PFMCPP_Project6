@@ -84,10 +84,9 @@ struct A
 {
     T* compare(T* a, T* b) 
     {
-        if (a == nullptr || b == nullptr) return nullptr;
+        if ((a == nullptr || b == nullptr) || a->distance == b->distance) return nullptr;
         if (a->distance < b->distance) return a;
         if (a->distance > b->distance) return b;
-        return nullptr;
     }
 };
 
@@ -149,6 +148,8 @@ int main()
 
     A f;
     auto* smaller = f.compare(&firstSign, &secondSign);
+
+    if (smaller == nullptr) exit(EXIT_FAILURE);
 
     std::cout << "the smaller one is << " << smaller->name << ".\nIf compare() returns a nullptr, then nothing will print out."<< std::endl;
 
