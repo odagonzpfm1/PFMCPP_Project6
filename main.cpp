@@ -152,9 +152,14 @@ int main()
     A f;
     auto* smaller = f.compare(&firstSign, &secondSign);
 
-    if (smaller == nullptr) exit(EXIT_FAILURE);
-
-    std::cout << "the smaller one is << " << smaller->name << ".\nIf compare() returns a nullptr, then nothing will print out."<< std::endl;
+    if (smaller == nullptr) 
+    {
+        std::cout << "Smaller returned a nullptr. This may be due to any of the following possibilities: the T structs that are passed on are not properly initialized; or they point to a nullptr themselves; or the return value of the compare function is returning a nullptr." << std::endl;
+    }
+    else
+    {
+        std::cout << "the smaller one is << " << smaller->name << ".\nIf compare() returns a nullptr, then nothing will print out."<< std::endl;
+    }
 
     U firstU;
     float updatedValue = 5.f;
