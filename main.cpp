@@ -158,7 +158,7 @@ int main()
     }
     else
     {
-        std::cout << "the smaller one is << " << smaller->name << ".\nIf compare() returns a nullptr, then nothing will print out."<< std::endl;
+        std::cout << "the smaller one is << " << smaller->name << std::endl;
     }
 
     U firstU;
