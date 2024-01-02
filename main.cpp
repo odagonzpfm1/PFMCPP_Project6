@@ -152,13 +152,13 @@ int main()
     A f;
     auto* smaller = f.compare(&firstSign, &secondSign);
 
-    if (smaller == nullptr) 
+    if (smaller == nullptr)
     {
-        std::cout << "Smaller returned a nullptr. This may be due to any of the following possibilities: the T structs that are passed on are not properly initialized; or they point to a nullptr themselves; or the return value of the compare function is returning a nullptr." << std::endl;
+        std::cout << "one or more arguments to the compare() function is a nullptr or all arguments' 'distance' member variable all have the same value." << std::endl;
     }
     else
     {
-        std::cout << "the smaller one is << " << smaller->name << std::endl;
+        std::cout << "the smaller one is " << smaller->name << std::endl;
     }
 
     U firstU;
