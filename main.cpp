@@ -5,33 +5,34 @@
 Create a branch named Part2
 
  References
- 
- 
- 1) convert the pointer usage (except for 'const char*') to reference types or 
+
+
+ 1) convert the pointer usage (except for 'const char*') to reference types or
     const reference types **>>> WHERE POSSIBLE <<<**
     Not every pointer can be converted.
-        hint: There is no reference equivalent to nullptr.  
+        hint: There is no reference equivalent to nullptr.
         if a pointer (including nullptr) is being returned anywhere, don't try to convert it to a reference and don't change the return type either.
 
     You have to ask yourself if each pointer can be converted to a (const) reference.
     Think carefully when making your changes.
 
- 2) revise the 'else' statement in main() that handles when `smaller` is a nullptr. 
- there is only one reason for `compare` to return nullptr. 
+ 2) revise the 'else' statement in main() that handles when `smaller` is a nullptr.
+ there is only one reason for `compare` to return nullptr.
  Update this std::cout expression to specify why nullptr was returned.
- 
+
  3) After you finish, click the [run] button.  Clear up any errors or warnings as best you can.
- 
+
  */
 
 
 #include <iostream>
 #include <string>
-struct T 
+
+struct T
 {
     int distance;
     std::string name;
-    T(int v, const char* letterName) 
+    T(int v, const char* letterName)
     {
         if (letterName == nullptr) return;
         distance = v;             // Implicit "this"
@@ -39,11 +40,11 @@ struct T
     }
 };
 
-struct A 
+struct A
 {
-    T* compare(T* a, T* b) 
+    T* compare(T* a, T* b) // Should not be converted to reference due to nullptr comparison
     {
-        if (a != nullptr && b != nullptr) 
+        if (a != nullptr && b != nullptr)
         {
             if (a->distance < b->distance) return a;
             if (a->distance > b->distance) return b;
@@ -52,16 +53,16 @@ struct A
     }
 };
 
-struct U 
+struct U
 {
     float value1{0}, value2{0};
     float updateValue(float* updatedValue)
     {
-        if (updatedValue == nullptr) return 0.0f;
+        if (updatedValue == nullptr) return 0.0f; // Same here
         std::cout << "U's value1 value: " << this->value1 << std::endl;
         this->value1 = *updatedValue;
         std::cout << "U's value1 updated value: " << this->value1 << std::endl;
-        while (std::abs(this->value2 - this->value1) > 0.001f) 
+        while (std::abs(this->value2 - this->value1) > 0.001f)
         {
             this->value2 += 0.01f;
         }
@@ -70,15 +71,15 @@ struct U
     }
 };
 
-struct Z 
+struct Z
 {
-    static float functionA (U* that, float* updatedValue) 
+    static float functionA (U* that, float* updatedValue) // Same here
     {
         if (that == nullptr || updatedValue == nullptr) return 0.0f;
         std::cout << "U's value1 value: " << that->value1 << std::endl;
         that->value1 = *updatedValue;
         std::cout << "U's value1 updated value: " << that->value1 << std::endl;
-        while (std::abs(that->value2 - that->value1) > 0.001f) 
+        while (std::abs(that->value2 - that->value1) > 0.001f)
         {
             that->value2 += 0.01f;
         }
@@ -103,7 +104,7 @@ struct Z
  Wait for my code review.
  */
 
-int main() 
+int main()
 {
     T firstSign(11, "A");
     T secondSign(17, "B");
@@ -123,9 +124,9 @@ int main()
     U firstU;
     float updatedValue = 5.f;
     std::cout << "[static func] firstU's multiplied values: \n" <<
-    Z::functionA(&firstU, &updatedValue) << std::endl; 
+              Z::functionA(&firstU, &updatedValue) << std::endl;
 
     U secondU;
     std::cout << "[member func] secondU's multiplied values: \n" <<
-    secondU.updateValue(&updatedValue) << std::endl;
+              secondU.updateValue(&updatedValue) << std::endl;
 }
