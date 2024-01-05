@@ -42,7 +42,7 @@ struct T
 
 struct A
 {
-    T* compare(T* a, T* b)
+    T* compare(T* a, T* b) // Should not be converted to reference due to nullptr comparison
     {
         if (a != nullptr && b != nullptr)
         {
@@ -58,7 +58,7 @@ struct U
     float value1{0}, value2{0};
     float updateValue(float* updatedValue)
     {
-        if (updatedValue == nullptr) return 0.0f;
+        if (updatedValue == nullptr) return 0.0f; // Same here
         std::cout << "U's value1 value: " << this->value1 << std::endl;
         this->value1 = *updatedValue;
         std::cout << "U's value1 updated value: " << this->value1 << std::endl;
@@ -73,7 +73,7 @@ struct U
 
 struct Z
 {
-    static float functionA (U* that, float* updatedValue)
+    static float functionA (U* that, float* updatedValue) // Same here
     {
         if (that == nullptr || updatedValue == nullptr) return 0.0f;
         std::cout << "U's value1 value: " << that->value1 << std::endl;
